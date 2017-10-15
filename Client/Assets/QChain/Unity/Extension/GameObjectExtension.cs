@@ -26,6 +26,7 @@
 
 namespace QFramework
 {
+    using System;
     using UnityEngine;
 
     /// <summary>
@@ -33,18 +34,6 @@ namespace QFramework
     /// </summary>
     public static class GameObjectExtension
     {
-        public static T Show<T>(this T selfComponent) where T : Component
-        {
-            selfComponent.gameObject.Show();
-            return selfComponent;
-        }
-
-        public static T Hide<T>(this T selfComponent) where T : Component
-        {
-            selfComponent.gameObject.Hide();
-            return selfComponent;
-        }
-        
         public static GameObject Show(this GameObject selfObj)
         {
             selfObj.SetActive(true);
@@ -55,6 +44,41 @@ namespace QFramework
         {
             selfObj.SetActive(false);
             return selfObj;
+        }
+
+        public static GameObject Name(this GameObject selfObj,string name)
+        {
+            selfObj.name = name;
+            return selfObj;
+        }
+
+        public static GameObject Layer(this GameObject selfObj, int layer)
+        {
+            selfObj.layer = layer;
+            return selfObj;
+        }
+
+        public static void DestroySelf(this GameObject selfObj)
+        {
+            GameObject.Destroy(selfObj);
+        }
+
+        public static GameObject OperateComponent<T>(this GameObject selfObj, Action<T> operateAction)
+        {
+            operateAction(selfObj.GetComponent<T>());
+            return selfObj;
+        }
+
+        public static T Show<T>(this T selfComponent) where T : Component
+        {
+            selfComponent.gameObject.Show();
+            return selfComponent;
+        }
+
+        public static T Hide<T>(this T selfComponent) where T : Component
+        {
+            selfComponent.gameObject.Hide();
+            return selfComponent;
         }
     }
 }

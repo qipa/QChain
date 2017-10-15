@@ -1,1 +1,5 @@
 Client/Library
+Client/.idea
+Client/Assets/Plugins/Editor/JetBrains
+JetBrains.meta
+Editor.meta
